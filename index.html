@@ -4,66 +4,233 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/heartfolder_99362.ico" type="image/x-icon">
-    <title>Love Calculator</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Monthsary & Anniversary Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'sans': ['Inter', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
-  <body>
-    <div class="container">
-        <div class="test">
-          <h1>Love Calculator</h1>
-          <form id="dateForm">
-            <div class="mb-3">
-              <label for="startDateInput" class="form-label">Start Date</label>
-              <input type="date" class="form-control" id="startDateInput" required>
+  <body class="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100">
+    <!-- Background pattern -->
+    <div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+      <!-- Decorative elements -->
+      <div class="absolute top-10 left-10 w-20 h-20 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>
+      <div class="absolute top-32 right-16 w-16 h-16 bg-purple-200 rounded-full opacity-30 animate-bounce"></div>
+      <div class="absolute bottom-20 left-20 w-12 h-12 bg-rose-200 rounded-full opacity-25 animate-pulse"></div>
+      <div class="absolute bottom-32 right-10 w-24 h-24 bg-indigo-200 rounded-full opacity-20 animate-bounce"></div>
+      <div class="w-full max-w-md relative z-10">
+        <!-- Main Card -->
+        <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white border-opacity-30">
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-4">
+              <svg class="w-8 h-8 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
             </div>
-            <div class="mb-3">
-              <label for="currentDateInput" class="form-label">Current Date</label>
-              <input type="date" class="form-control" id="currentDateInput" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Calculate</button>
-          </form>
-          <div id="resultContainer" class="mt-3 d-none">
-            <p id="resultText"></p>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Monthsary & Anniversary Calculator</h1>
+            <p class="text-gray-600">Calculate your love journey together</p>
           </div>
+
+          <!-- Form -->
+          <form id="dateForm" class="space-y-6">
+            <!-- Names Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="partner1Name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                <input type="text" id="partner1Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition duration-200" placeholder="Enter your name" required>
+              </div>
+              <div>
+                <label for="partner2Name" class="block text-sm font-medium text-gray-700 mb-2">Partner's Name</label>
+                <input type="text" id="partner2Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition duration-200" placeholder="Enter partner's name" required>
+              </div>
+            </div>
+
+            <!-- Dates Section -->
+            <div class="space-y-4">
+              <div>
+                <label for="startDateInput" class="block text-sm font-medium text-gray-700 mb-2">Relationship Start Date</label>
+                <input type="date" id="startDateInput" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition duration-200" min="1900-01-01" max="2024-12-31" required>
+              </div>
+              <div>
+                <label for="currentDateInput" class="block text-sm font-medium text-gray-700 mb-2">Current Date</label>
+                <input type="date" id="currentDateInput" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition duration-200" min="1900-01-01" max="2030-12-31" required>
+              </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+              <span class="flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                Calculate Love Journey
+              </span>
+            </button>
+          </form>
+
         </div>
-    </div>
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="text-center">
-        <span class="text-muted">Love Calculator &copy; 2023 by Janzen Forrest Dela Cruz</span>
+
+        <!-- Footer -->
+        <div class="text-center mt-8">
+          <p class="text-gray-600 text-sm">Monthsary & Anniversary Calculator &copy; 2023 by Janzen Forrest Dela Cruz</p>
+        </div>
       </div>
-    </footer>
+    </div>
     <script>
       const form = document.getElementById('dateForm');
-      const resultContainer = document.getElementById('resultContainer');
-      const resultText = document.getElementById('resultText');
+      const startDateInput = document.getElementById('startDateInput');
+      const currentDateInput = document.getElementById('currentDateInput');
+
+      // Set current date as default and update max date for start date
+      const today = new Date().toISOString().split('T')[0];
+      currentDateInput.value = today;
+      startDateInput.max = today; // Start date cannot be in the future
+
+      // Add real-time validation
+      startDateInput.addEventListener('change', function() {
+        if (this.value > currentDateInput.value) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Date Range',
+            text: 'Start date cannot be after current date!',
+            confirmButtonColor: '#ec4899'
+          });
+          this.value = '';
+        }
+      });
+
+      currentDateInput.addEventListener('change', function() {
+        if (this.value < startDateInput.value) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Date Range',
+            text: 'Current date cannot be before start date!',
+            confirmButtonColor: '#ec4899'
+          });
+          this.value = today;
+        }
+      });
 
       form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const startDate = new Date(document.getElementById('startDateInput').value);
-        const currentDate = new Date(document.getElementById('currentDateInput').value);
+        const partner1Name = document.getElementById('partner1Name').value.trim();
+        const partner2Name = document.getElementById('partner2Name').value.trim();
+        const startDate = new Date(startDateInput.value);
+        const currentDate = new Date(currentDateInput.value);
 
+        // Validate names
+        if (!partner1Name || !partner2Name) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Missing Information',
+            text: 'Please enter both names!',
+            confirmButtonColor: '#ec4899'
+          });
+          return;
+        }
+
+        // Validate dates
+        if (!startDateInput.value || !currentDateInput.value) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Missing Dates',
+            text: 'Please select both dates!',
+            confirmButtonColor: '#ec4899'
+          });
+          return;
+        }
+
+        if (startDate > currentDate) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Invalid Date',
+            text: 'Start date cannot be after current date!',
+            confirmButtonColor: '#ec4899'
+          });
+          return;
+        }
+
+        // Calculate the difference
         const monthsDiff = (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
           (currentDate.getMonth() - startDate.getMonth());
         const years = Math.floor(monthsDiff / 12);
         const months = monthsDiff % 12;
+        const days = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
 
-        let result = "The duration of the relationship is approximately";
-        
+        // Create personalized result
+        let durationText = '';
         if (years > 0) {
-          result += ` ${years} ${years === 1 ? "year" : "years"}`;
+          durationText += `${years} ${years === 1 ? "year" : "years"}`;
+          if (months > 0) {
+            durationText += ` and ${months} ${months === 1 ? "month" : "months"}`;
+          }
+        } else if (months > 0) {
+          durationText += `${months} ${months === 1 ? "month" : "months"}`;
+        } else {
+          durationText += `${days} ${days === 1 ? "day" : "days"}`;
         }
-        
-        if (months > 0) {
-          result += ` ${months} ${months === 1 ? "month" : "months"}`;
+
+        // Add special milestones
+        let milestoneText = '';
+        if (monthsDiff >= 12) {
+          milestoneText = `✨ That's ${Math.floor(monthsDiff / 12)} amazing ${Math.floor(monthsDiff / 12) === 1 ? 'year' : 'years'} together! ✨`;
+        } else if (monthsDiff >= 6) {
+          milestoneText = `💖 Half a year of love and counting! 💖`;
+        } else if (monthsDiff >= 3) {
+          milestoneText = `🌹 3+ months of beautiful memories! 🌹`;
+        } else if (monthsDiff >= 1) {
+          milestoneText = `💝 Your first month together - how sweet! 💝`;
+        } else {
+          milestoneText = `💕 Every day together is precious! 💕`;
         }
-        
-        resultText.textContent = result + ".";
-        resultContainer.classList.remove('d-none');
+
+        // Show SweetAlert
+        Swal.fire({
+          title: `💕 ${partner1Name} & ${partner2Name}'s Love Journey 💕`,
+          html: `
+            <div style="text-align: center; padding: 20px;">
+              <div style="font-size: 24px; margin-bottom: 15px; color: #ec4899;">
+                You've been together for <strong>${durationText}</strong>! 🎉
+              </div>
+              <div style="font-size: 18px; color: #6b7280; margin-top: 15px;">
+                ${milestoneText}
+              </div>
+            </div>
+          `,
+          icon: 'success',
+          confirmButtonText: 'Calculate Again 💕',
+          confirmButtonColor: '#ec4899',
+          background: '#fef7f7',
+          customClass: {
+            popup: 'swal2-popup-custom',
+            title: 'swal2-title-custom'
+          },
+          showClass: {
+            popup: 'animate__animated animate__fadeInUp'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutDown'
+          }
+        }).then(() => {
+          // Reset form after closing alert
+          form.reset();
+          currentDateInput.value = today;
+        });
       });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
